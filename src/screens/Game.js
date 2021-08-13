@@ -7,8 +7,7 @@ import Base from '../components/Base';
 import Pipe from '../components/Pipe';
 
 const Game = props => {
-  const {gameState, stop, start, fly} =
-    useContext(context);
+  const {gameState, stop, start, fly} = useContext(context);
 
   if (gameState === GAME.END) {
     stop();
@@ -26,17 +25,19 @@ const Game = props => {
         source={require('../../assets/sprites/background-day.png')}
         style={{flex: 1}}>
         {gameState === GAME.START ? (
-          <Image
-            source={require('../../assets/sprites/message.png')}
-            style={{
-              height: SCREEN_HEIGHT / 2,
-              width: (2 * SCREEN_WIDTH) / 3,
-              resizeMode: 'contain',
-              position: 'absolute',
-              alignSelf: 'center',
-              top: (2 * SCREEN_HEIGHT) / 14,
-            }}
-          />
+          <TouchableWithoutFeedback onPress={touchScreen}>
+            <Image
+              source={require('../../assets/sprites/message.png')}
+              style={{
+                height: SCREEN_HEIGHT / 2,
+                width: (2 * SCREEN_WIDTH) / 3,
+                resizeMode: 'contain',
+                position: 'absolute',
+                alignSelf: 'center',
+                top: (2 * SCREEN_HEIGHT) / 14,
+              }}
+            />
+          </TouchableWithoutFeedback>
         ) : null}
         <Bird />
         <Pipe />
