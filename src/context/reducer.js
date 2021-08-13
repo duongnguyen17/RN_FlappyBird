@@ -94,7 +94,7 @@ export const reducer = (state = defaultStatus, action) => {
           yTop: topHeight,
           yBottom: topHeight + DIS_PIPE,
         }));
-      console.log(`pipeCheck`, pipeCheck);
+      // console.log(`pipeCheck`, pipeCheck);
       if (pipeCheck.length) {
         const {coorx, yTop, yBottom} = pipeCheck[0];
         if (
