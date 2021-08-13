@@ -6,8 +6,7 @@ export default createContext({
   bases: [],
   pipes: [],
   gameState: GAME.START,
-  fly: () => {},
-  start: () => {},
+  touchScreen: () => {},
   stop: () => {},
   // changeSoundState: () => {},
 });

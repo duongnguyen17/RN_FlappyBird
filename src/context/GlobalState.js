@@ -6,7 +6,6 @@ import {
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
   DIS_COLUMN,
-  DIS_PIPE,
   BASE,
   ACTION,
 } from './constants';
@@ -51,6 +50,12 @@ const Globalstate = props => {
     clearInterval(pipeGenerator);
   }, [gameLoop, pipeGenerator]);
 
+  const touchScreen = () => {
+    fly();
+    if (state.gameState !== GAME.PLAYING) {
+      start();
+    }
+  };
   return (
     <Context.Provider
       value={{
@@ -58,8 +63,7 @@ const Globalstate = props => {
         gameState: state.gameState,
         pipes: state.pipes,
         bases: state.bases,
-        fly: fly,
-        start: start,
+        touchScreen: touchScreen,
         stop: stop,
       }}>
       {props.children}
