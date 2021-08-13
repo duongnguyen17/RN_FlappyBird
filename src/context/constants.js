@@ -12,12 +12,17 @@ export const GAME = {
   END: 'END',
 };
 export const PIPE = {
-  GENERATE: 'GENERATE',
-  RUNNING: 'RUNNING',
+  GENERATE: 'PIPE_GENERATE',
+  RUNNING: 'PIPE_RUNNING',
 };
+export const ACTION = {RUNNING: 'BASE_RUNNING', CHECK: 'CHECK'};
+export const BASE = {GENERATE: 'BASE_GENERATE', RUNNING: 'BASE_RUNNING'};
 
 export const SCREEN_WIDTH = Dimensions.get('screen').width;
 export const SCREEN_HEIGHT = Dimensions.get('screen').height;
-export const FLY_HEIGHT = SCREEN_HEIGHT / 15;
+export const FLY_HEIGHT = 75;
 export const FALL_HEIGHT = SCREEN_HEIGHT / 100;
-export const SPEED = 10
+export const SPEED = 10;
+export const DIS_COLUMN = (2 * SCREEN_WIDTH) / 3;
+export const DIS_PIPE = 150;
+export const PIPE_WIDTH = SCREEN_WIDTH / 5;

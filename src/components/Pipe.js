@@ -1,22 +1,27 @@
 import React, {useContext} from 'react';
 import {Image, View} from 'react-native';
-import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../context/constants';
+import {
+  DIS_PIPE,
+  PIPE_WIDTH,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+} from '../context/constants';
 import context from '../context/context';
 
 const Pipe = () => {
-  const {coorx, pipes} = useContext(context);
-  // console.log(`pipes`, coorx, pipes);
+  const {pipes} = useContext(context);
+  // console.log(`pipes`, pipes);
   return (
     <View style={{}}>
-      {pipes.map(({topHeight}, index) => (
+      {pipes.map(({coorx, topHeight}, index) => (
         <View key={index}>
           <Image
             style={{
               position: 'absolute',
               top: 0,
-              left: coorx + (index * 2 * SCREEN_WIDTH) / 3,
-              width: SCREEN_WIDTH / 5,
-              height: topHeight,
+              left: coorx,
+              width: PIPE_WIDTH,
+              height: topHeight ?? 0,
               resizeMode: 'stretch',
               transform: [{rotate: '180deg'}],
             }}
@@ -25,11 +30,11 @@ const Pipe = () => {
           <Image
             style={{
               position: 'absolute',
-              top: topHeight + (SCREEN_HEIGHT * 3) / 20,
-              left: coorx + (index * 2 * SCREEN_WIDTH) / 3,
-              width: SCREEN_WIDTH / 5,
+              top: topHeight ? topHeight + DIS_PIPE : SCREEN_HEIGHT,
+              left: coorx,
+              width: PIPE_WIDTH,
               resizeMode: 'stretch',
-              height: (17 * SCREEN_HEIGHT) / 20 - topHeight,
+              height: topHeight ? SCREEN_HEIGHT - topHeight - DIS_PIPE : 0,
             }}
             source={require('../../assets/sprites/pipe-green.png')}
           />

@@ -7,11 +7,11 @@ import Base from '../components/Base';
 import Pipe from '../components/Pipe';
 
 const Game = props => {
-  const {gameState, gameLoop, pipeGenerator, start, fly} = useContext(context);
-  // console.log(`gameState`, gameState);
+  const {gameState, stop, start, fly} =
+    useContext(context);
+
   if (gameState === GAME.END) {
-    clearInterval(gameLoop);
-    clearInterval(pipeGenerator);
+    stop();
   }
 
   const touchScreen = () => {
@@ -34,7 +34,7 @@ const Game = props => {
               resizeMode: 'contain',
               position: 'absolute',
               alignSelf: 'center',
-              top: 2* SCREEN_HEIGHT / 14,
+              top: (2 * SCREEN_HEIGHT) / 14,
             }}
           />
         ) : null}
