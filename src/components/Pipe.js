@@ -21,6 +21,7 @@ const Pipe = () => {
               top: 0,
               left: coorx,
               width: PIPE_WIDTH,
+              // backgroundColor: 'gray',
               height: topHeight ?? 0,
               resizeMode: 'stretch',
               transform: [{rotate: '180deg'}],
@@ -33,6 +34,7 @@ const Pipe = () => {
               top: topHeight ? topHeight + DIS_PIPE : SCREEN_HEIGHT,
               left: coorx,
               width: PIPE_WIDTH,
+              // backgroundColor: 'gray',
               resizeMode: 'stretch',
               height: topHeight ? SCREEN_HEIGHT - topHeight - DIS_PIPE : 0,
             }}

@@ -26,3 +26,7 @@ export const SPEED = 10;
 export const DIS_COLUMN = (2 * SCREEN_WIDTH) / 3;
 export const DIS_PIPE = 150;
 export const PIPE_WIDTH = SCREEN_WIDTH / 5;
+export const BIRD_WIDTH = 50;
+export const BIRD_HEIGHT = 40;
+//mức độ chính xác khi check va chạm (đơn vị pixel)
+export const ACCURACY = 5;

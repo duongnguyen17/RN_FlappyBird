@@ -1,8 +1,9 @@
-
 import {
   ACTION,
   BASE,
   BIRD,
+  BIRD_HEIGHT,
+  BIRD_WIDTH,
   DIS_COLUMN,
   DIS_PIPE,
   FALL_HEIGHT,
@@ -28,16 +29,21 @@ const defaultState = {
 };
 export const reducer = (state = defaultStatus, action) => {
   switch (action.type) {
+    //chim bay lênÏ
     case BIRD.FLY:
       return {
         ...state,
         birdState: {y: state.birdState.y - FLY_HEIGHT, r: '-30deg'},
       };
+
+    // chim rơi
     case BIRD.FALL:
       return {
         ...state,
         birdState: {y: state.birdState.y + FALL_HEIGHT, r: '0deg'},
       };
+
+    //cho nền chạy
     case ACTION.RUNNING:
       return {
         ...state,
@@ -48,6 +54,7 @@ export const reducer = (state = defaultStatus, action) => {
         bases: state.bases.map((value, index) => value - SPEED),
       };
 
+    //sinh nền : có 2 nền thay nhau
     case BASE.GENERATE:
       if (state.bases[0] === 0) {
         let basesTemp = [...state.bases];
@@ -59,6 +66,8 @@ export const reducer = (state = defaultStatus, action) => {
         return {...state, bases: [...basesTemp]};
       }
       return {...state};
+
+    //sinh ống: có 3 cặp ống thay nhau
     case PIPE.GENERATE:
       let pipesTemp = [...state.pipes];
       const topHeight = Math.round(Math.random() * 200) + DIS_PIPE;
@@ -81,11 +90,18 @@ export const reducer = (state = defaultStatus, action) => {
         pipesTemp[2] = {...pipesTemp[2], topHeight};
         return {...state, pipes: [...pipesTemp]};
       }
+
+    //kiểm tra điều kiện kết thúc game
     case ACTION.CHECK:
-      let temp = SCREEN_WIDTH / 2;
+      let screenWidthChia2 = SCREEN_WIDTH / 2;
+      let pipeWidthChia2 = PIPE_WIDTH / 2;
+      let birdWidthChia2 = BIRD_WIDTH / 2;
       const pipeCheck = state.pipes
         .filter(({coorx}) => {
-          if (temp - PIPE_WIDTH <= coorx && coorx <= temp + PIPE_WIDTH) {
+          if (
+            screenWidthChia2 - PIPE_WIDTH <= coorx &&
+            coorx <= screenWidthChia2 + PIPE_WIDTH
+          ) {
             return true;
           }
         })
@@ -94,16 +110,16 @@ export const reducer = (state = defaultStatus, action) => {
           yTop: topHeight,
           yBottom: topHeight + DIS_PIPE,
         }));
-      // console.log(`pipeCheck`, pipeCheck);
+
       if (pipeCheck.length) {
         const {coorx, yTop, yBottom} = pipeCheck[0];
         if (
-          (state.birdState.y > yTop &&
-            coorx > temp - PIPE_WIDTH / 2 &&
-            coorx < temp + PIPE_WIDTH / 2) ||
-          (state.birdState.y < yBottom &&
-            coorx > temp - PIPE_WIDTH / 2 &&
-            coorx < temp + PIPE_WIDTH / 2)
+          (state.birdState.y < yTop &&
+            coorx < screenWidthChia2 + birdWidthChia2 &&
+            coorx + PIPE_WIDTH > screenWidthChia2 - birdWidthChia2) ||
+          (state.birdState.y + BIRD_HEIGHT > yBottom &&
+            coorx < screenWidthChia2 + birdWidthChia2 &&
+            coorx + PIPE_WIDTH > screenWidthChia2 - birdWidthChia2)
         ) {
           return {...state, gameState: GAME.END};
         }
@@ -111,8 +127,12 @@ export const reducer = (state = defaultStatus, action) => {
       if (state.birdState.y > (5 * SCREEN_HEIGHT) / 6)
         return {...state, gameState: GAME.END};
       return {...state};
+
+    //bắt đầu chơi
     case GAME.PLAYING:
       return {...state, gameState: GAME.PLAYING};
+
+    //chuyển sang trạng thái bắt đầu game
     case GAME.START:
       return {...defaultState, gameState: GAME.START};
     default:
