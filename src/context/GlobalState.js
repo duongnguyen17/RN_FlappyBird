@@ -33,7 +33,7 @@ const Globalstate = props => {
       pipeGenerator = setInterval(() => {
         dispatch({type: BASE.GENERATE});
         dispatch({type: PIPE.GENERATE});
-      }, 50);
+      }, 100);
       gameLoop = setInterval(() => {
         dispatch({type: BIRD.FALL});
         dispatch({type: ACTION.RUNNING});
