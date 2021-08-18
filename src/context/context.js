@@ -5,6 +5,7 @@ export default createContext({
   // sound: {},
   bases: [],
   pipes: [],
+  score: 0,
   gameState: GAME.START,
   touchScreen: () => {},
   stop: () => {},

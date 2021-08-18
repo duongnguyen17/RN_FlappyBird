@@ -6,10 +6,17 @@ import {
   View,
 } from 'react-native';
 import context from '../context/context';
-import {GAME, SCREEN_HEIGHT, SCREEN_WIDTH} from '../context/constants';
+import {
+  BIRD_HEIGHT,
+  GAME,
+  PIPE_WIDTH,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+} from '../context/constants';
 import Bird from '../components/Bird';
 import Base from '../components/Base';
 import Pipe from '../components/Pipe';
+import Score from '../components/Score';
 
 const Game = props => {
   const {gameState, stop, touchScreen} = useContext(context);
@@ -22,6 +29,9 @@ const Game = props => {
     <ImageBackground
       source={require('../../assets/sprites/background-day.png')}
       style={{flex: 1}}>
+      <Pipe />
+      <Base />
+
       {gameState === GAME.START ? (
         <Image
           source={require('../../assets/sprites/message.png')}
@@ -34,10 +44,21 @@ const Game = props => {
             top: (2 * SCREEN_HEIGHT) / 14,
           }}
         />
-      ) : null}
+      ) : (
+        <Score
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            top: SCREEN_HEIGHT / 10,
+            position: 'absolute',
+            flexDirection: 'row',
+            alignSelf: 'center',
+            height: 2 * BIRD_HEIGHT,
+            width: PIPE_WIDTH,
+          }}
+        />
+      )}
       <Bird />
-      <Pipe />
-      <Base />
       <TouchableWithoutFeedback
         style={{position: 'absolute', flex: 1}}
         onPress={touchScreen}>
