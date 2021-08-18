@@ -117,7 +117,7 @@ export const reducer = (state = defaultStatus, action) => {
           yTop: topHeight,
           yBottom: topHeight + DIS_PIPE,
         }));
-      console.log(`pipeCheck`, pipeCheck);
+      // console.log(`pipeCheck`, pipeCheck);
       if (pipeCheck.length) {
         const {coorx, yTop, yBottom} = pipeCheck[0];
         if (
@@ -126,14 +126,14 @@ export const reducer = (state = defaultStatus, action) => {
         ) {
           return {...state, gameState: GAME.END};
         } else {
-          console.log('0');
+          // console.log('0');
           return {...state, count: 1};
         }
       }
       if (state.birdState.y > (5 * SCREEN_HEIGHT) / 6)
         return {...state, gameState: GAME.END};
       if (state.count) {
-        console.log('1');
+        // console.log('1');
         return {...state, score: state.score + 1, count: 0};
       }
       return {...state};
