@@ -1,4 +1,4 @@
-import React, {useReducer, useCallback} from 'react';
+import React, {useReducer, useCallback, useRef} from 'react';
 import {
   BIRD,
   GAME,
@@ -12,6 +12,8 @@ import {
 import {reducer} from './reducer';
 import Context from './context';
 const Globalstate = props => {
+  const loopRef = useRef({});
+
   const [state, dispatch] = useReducer(reducer, {
     birdState: {r: '0deg', y: (4 * SCREEN_HEIGHT) / 9},
     pipes: [
@@ -24,44 +26,34 @@ const Globalstate = props => {
     score: 0,
     gameState: GAME.START,
   });
+
   const fly = () => {
     dispatch({type: BIRD.FLY});
   };
 
-  let gameLoop;
-  let pipeGenerator;
-  let baseGenerator;
-  let check;
-  const start = useCallback(() => {
+  const start =() => {
     dispatch({type: GAME.PLAYING});
-    pipeGenerator = setInterval(() => {
+    loopRef.current.pipeGenerator = setInterval(() => {
       dispatch({type: PIPE.GENERATE});
     }, 350);
-    baseGenerator = setInterval(() => {
+    loopRef.current.baseGenerator = setInterval(() => {
       dispatch({type: BASE.GENERATE});
     }, 1000);
-    gameLoop = setInterval(() => {
+    loopRef.current.gameLoop = setInterval(() => {
       dispatch({type: BIRD.FALL});
       dispatch({type: ACTION.RUNNING});
     }, 50);
-    check = setInterval(() => {
+    loopRef.current.check = setInterval(() => {
       dispatch({type: ACTION.CHECK});
-    }, 50);
-  }, [gameLoop, pipeGenerator, baseGenerator, check]);
-  const stop = useCallback(() => {
-    // console.log(
-    //   `stop()`,
-    //   gameLoop,
-    //   pipeGenerator,
-    //   baseGenerator,
-    //   check,
-    //   state.gameState,
-    // );
-    clearInterval(gameLoop);
-    clearInterval(pipeGenerator);
-    clearInterval(baseGenerator);
-    clearInterval(check);
-  }, [gameLoop, pipeGenerator, baseGenerator, check]);
+    }, 16);
+  }
+
+  const stop = () => {
+    clearInterval(loopRef.current.gameLoop);
+    clearInterval(loopRef.current.pipeGenerator);
+    clearInterval(loopRef.current.baseGenerator);
+    clearInterval(loopRef.current.check);
+  }
 
   const replay = () => {
     dispatch({type: GAME.START});

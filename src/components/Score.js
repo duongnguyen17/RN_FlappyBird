@@ -1,41 +1,53 @@
-import React, {useContext, useMemo} from 'react';
-import {Image, Text, View} from 'react-native';
+import React, {memo, useContext, useMemo} from 'react';
+import {Image, View} from 'react-native';
+import {
+  COUNT_0,
+  COUNT_1,
+  COUNT_2,
+  COUNT_3,
+  COUNT_4,
+  COUNT_5,
+  COUNT_6,
+  COUNT_7,
+  COUNT_8,
+  COUNT_9,
+} from '../common';
+import {BIRD_HEIGHT} from '../context/constants';
 import context from '../context/context';
-import {BIRD_HEIGHT, SCREEN_HEIGHT, SCREEN_WIDTH} from '../context/constants';
-const Score = ({style}) => {
+const Score = memo(({style}) => {
   const {score} = useContext(context);
   const renScore = useMemo(() => {
     let src;
     let scoreArr = [...score.toString()].map((value, index) => {
       switch (value) {
         case '1':
-          src = require('../../assets/sprites/1.png');
+          src = COUNT_1;
           break;
         case '2':
-          src = require('../../assets/sprites/2.png');
+          src = COUNT_2;
           break;
         case '3':
-          src = require('../../assets/sprites/3.png');
+          src = COUNT_3;
           break;
         case '4':
-          src = require('../../assets/sprites/4.png');
+          src = COUNT_4;
           break;
         case '5':
-          src = require('../../assets/sprites/5.png');
+          src = COUNT_5;
           break;
         case '6':
-          src = require('../../assets/sprites/6.png');
+          src = COUNT_6;
           break;
         case '7':
-          src = require('../../assets/sprites/7.png');
+          src = COUNT_7;
           break;
         case '8':
-          src = require('../../assets/sprites/8.png');
+          src = COUNT_8;
           break;
         case '9':
-          src = require('../../assets/sprites/9.png');
+          src = COUNT_9;
         default:
-          src = require('../../assets/sprites/0.png');
+          src = COUNT_0;
           break;
       }
       return (
@@ -49,5 +61,5 @@ const Score = ({style}) => {
     return scoreArr;
   }, [score]);
   return <View style={style}>{renScore}</View>;
-};
+});
 export default Score;

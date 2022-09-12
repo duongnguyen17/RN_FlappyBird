@@ -1,0 +1,15 @@
+export const DOWN_BIRD = require('../assets/sprites/bluebird-downflap.png');
+export const COUNT_1 = require('../assets/sprites/1.png');
+export const COUNT_2 = require('../assets/sprites/2.png');
+export const COUNT_3 = require('../assets/sprites/3.png');
+export const COUNT_4 = require('../assets/sprites/4.png');
+export const COUNT_5 = require('../assets/sprites/5.png');
+export const COUNT_6 = require('../assets/sprites/6.png');
+export const COUNT_7 = require('../assets/sprites/7.png');
+export const COUNT_8 = require('../assets/sprites/8.png');
+export const COUNT_9 = require('../assets/sprites/9.png');
+export const COUNT_0 = require('../assets/sprites/0.png');
+export const GREEN_PIPE = require('../assets/sprites/pipe-green.png');
+export const BASE = require('../assets/sprites/base.png');
+export const BG_DAY = require('../assets/sprites/background-day.png');
+export const MESSAGE = require('../assets/sprites/message.png');
